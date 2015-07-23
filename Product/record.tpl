@@ -1,14 +1,18 @@
-<div fx:template="record" fx:of="product:record" class="std_record product_record" fx:name="Default product record" fx:with="$item">
-    <div class="image">
-        <img src="{$image | 'max-width:500,max-height:500'}" alt="{$name}" />
+<div fx:template="record" fx:of="record" fx:b="record type_product" fx:name="Default product record" fx:with="$item">
+    {@image_width type="number" default="700" label="Ширина картинки"}
+    {@show_name type="checkbox" default="1" label="Показать название"}
+    
+    {set $image_size = 'max-width: ' . $image_width . '; max-height: '.$image_width}
+    <div fx:e="image">
+        <img src="{$image | fx::image : $image_size}" alt="{$name}" />
     </div>
-    <div class="data">
-        <div class="name">{$name /}</div>
-        <div class="tagline">{$short_description}</div>
-        <div class="price" fx:aif="$price">
-            <span class="field_title">{%price_title}Price:{/%}</span>
-            <span class="field_value">{$price}</span>&nbsp;<span class="currency">{%currency}USD{/%}</span>
+    <div fx:e="data">
+        <div fx:if="$show_name" fx:e="name">{$name /}</div>
+        <div fx:e="description">{$description}</div>
+        <div fx:e="price" fx:b="price" fx:aif="$price">
+            <span fx:e="title">{%price_title}Price:{/%}</span>
+            <span fx:e="value">{$price}</span>&nbsp;<span fx:e="currency">{%currency}USD{/%}</span>
         </div>
-        <div class="description">{$description}</div>
+        <div fx:e="full-text">{$full_text}</div>
     </div>
 </div>
