@@ -4,7 +4,7 @@
     
     {set $image_size = 'max-width: ' . $image_width . '; max-height: '.$image_width}
     <div fx:e="image">
-        <img src="{$image | fx::image : $image_size}" alt="{$name}" />
+        <img fx:if="$image" src="{$image | fx::image : $image_size}" alt="{$name}" />
     </div>
     <div fx:e="data">
         <div fx:if="$show_name" fx:e="name">{$name /}</div>
